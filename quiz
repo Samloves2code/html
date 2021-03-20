@@ -1,0 +1,282 @@
+
+<html>
+    
+<h1>Quiz on Capital Cities!</h1>
+<img src="https://cdn.pixabay.com/photo/2012/12/10/04/26/flags-69190_960_720.jpg" alt="Flags" style="position:fixed; left:0px; top:8px; width:200px; height:200px; border:1px DashedTomato;">
+<div class="quiz-container">
+  <div id="quiz"></div>
+</div>
+<button id="previous">Previous Question</button>
+<button id="next">Next Question</button>
+<button id="submit">Submit Quiz</button>
+<button id="end">End Quiz</button>
+<div id="results"></div>
+
+<script>
+
+    document.getElementById("end").onclick = function () {
+        location.href = "https://www.news4kids.uk/html-pages/quiz/end.html";
+    };
+
+(function(){
+  function buildQuiz(){
+
+    const output = [];
+
+    // for each question...
+    myQuestions.forEach(
+      (currentQuestion, questionNumber) => {
+
+
+        const answers = [];
+
+
+        for(letter in currentQuestion.answers){
+
+
+          answers.push(
+            `<label>
+              <input type="radio" name="question${questionNumber}" value="${letter}">
+              ${letter} :
+              ${currentQuestion.answers[letter]}
+            </label>`
+          );
+        }
+
+ 
+        output.push(
+          `<div class="slide">
+            <div class="question"> ${currentQuestion.question} </div>
+            <div class="answers"> ${answers.join("")} </div>
+          </div>`
+        );
+      }
+    );
+
+ 
+    quizContainer.innerHTML = output.join('');
+  }
+
+  function showResults(){
+
+
+    const answerContainers = quizContainer.querySelectorAll('.answers');
+
+
+    let numCorrect = 0;
+
+
+    myQuestions.forEach( (currentQuestion, questionNumber) => {
+
+
+      const answerContainer = answerContainers[questionNumber];
+      const selector = `input[name=question${questionNumber}]:checked`;
+      const userAnswer = (answerContainer.querySelector(selector) || {}).value;
+
+      // if answer is correct
+      if(userAnswer === currentQuestion.correctAnswer){
+        // add to the number of correct answers
+        numCorrect++;
+
+        // color the answers green
+        answerContainers[questionNumber].style.color = 'lightgreen';
+      }
+      // if answer is wrong or blank
+      else{
+        // color the answers red
+        answerContainers[questionNumber].style.color = 'red';
+      }
+    });
+
+    // show number of correct answers out of total
+    resultsContainer.innerHTML = `${numCorrect} out of ${myQuestions.length}`;
+  }
+
+  function showSlide(n) {
+    slides[currentSlide].classList.remove('active-slide');
+    slides[n].classList.add('active-slide');
+    currentSlide = n;
+    if(currentSlide === 0){
+      previousButton.style.display = 'none';
+    }
+    else{
+      previousButton.style.display = 'inline-block';
+      
+    }
+    if(currentSlide === slides.length-1){
+      nextButton.style.display = 'none';
+      submitButton.style.display = 'inline-block';
+    }
+    else{
+      nextButton.style.display = 'inline-block';
+      submitButton.style.display = 'none';
+    }
+  }
+
+  function showNextSlide() {
+    showSlide(currentSlide + 1);
+  }
+
+  function showPreviousSlide() {
+    showSlide(currentSlide - 1);
+  }
+
+  // Variables
+  const quizContainer = document.getElementById('quiz');
+  const resultsContainer = document.getElementById('results');
+  const submitButton = document.getElementById('submit');
+const hintButton = document.getElementById('hint');
+  const myQuestions = [
+    {
+      question: "1/6 - What is the capital city of Russia?",
+      answers: {
+        a: "Moscow",
+        b: "Beijing",
+        c: "Russian Fed"
+      },
+      correctAnswer: "a"
+    },
+    {
+      question: "2/6 - What is the capital city of Ukraine?",
+      answers: {
+        a: "London",
+        b: "Rechvick",
+        c: "Kyiv"
+      },
+      correctAnswer: "c"
+    },
+    {
+      question: "3/6 - What is Paris the capital city of?",
+      answers: {
+        a: "Italy",
+        b: "France",
+        c: "Australia",
+        d: "New York"
+      },
+      correctAnswer: "b"
+    },
+    {
+      question: "4/6 - What is the capital city of Australia?",
+      answers: {
+        a: "Andora",
+        b: "Sydney",
+        c: "Cranberria",
+        d: "Canberra"
+      },
+      correctAnswer: "d"
+    },
+    {
+      question: "5/6 - What is the capital city of Belgium?",
+      answers: {
+        a: "Paris",
+        b: "Belgius City",
+        c: "Gaborne",
+        d: "Brussels"
+      },
+      correctAnswer: "d"
+    },
+    {
+      question: "6/6 - What is the capital city of Canada?",
+      answers: {
+        a: "Owa",
+        b: "Ottowa",
+        c: "Dili",
+        d: "Oslo"
+      },
+      correctAnswer: "b"
+    },
+  ];
+
+  buildQuiz();
+
+
+  const previousButton = document.getElementById("previous");
+  const nextButton = document.getElementById("next");
+  const slides = document.querySelectorAll(".slide");
+  let currentSlide = 0;
+
+
+  showSlide(currentSlide);
+
+
+  submitButton.addEventListener('click', showResults);
+  previousButton.addEventListener("click", showPreviousSlide);
+  nextButton.addEventListener("click", showNextSlide);
+})();
+
+</script>
+<style>
+@import url(https://fonts.googleapis.com/css?family=Work+Sans:300,600);
+
+body{
+	font-size: 20px;
+	font-family: 'Work Sans', sans-serif;
+	color: #333;
+  font-weight: 300;
+  text-align: center;
+  background-color: #f8f6f0;
+}
+h1{
+  font-weight: 300;
+  margin: 0px;
+  padding: 10px;
+  font-size: 25px;
+  background-color: DodgerBlue;
+  color: #fff;
+}
+.question{
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+.answers {
+  margin-bottom: 20px;
+  text-align: left;
+  display: inline-block;
+}
+.answers label{
+  display: block;
+  margin-bottom: 10px;
+}
+button{
+  font-family: 'Work Sans', sans-serif;
+	font-size: 22px;
+	background-color: #279;
+	color: #fff;
+	border: 0px;
+	border-radius: 3px;
+	padding: 20px;
+	cursor: pointer;
+	margin-bottom: 20px;
+}
+button:hover{
+	background-color: Green;
+}
+
+
+
+
+
+.slide{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 1s;
+}
+.active-slide{
+  opacity: 1;
+  z-index: 2;
+}
+.quiz-container{
+  position: relative;
+  height: 200px;
+  margin-top: 55px;
+}
+#end {
+    position:relative;
+    background-color:Red;
+}
+</style>
+</html>
