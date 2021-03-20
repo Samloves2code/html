@@ -1,0 +1,80 @@
+<html>
+
+<head>
+    <title>FREE online 2do list - N4K</title>
+    <link rel="stylesheet" href="https://news4kids.uk/html-pages/2dolist/style.css">
+</head>
+<header>
+        <ul>
+            <li><a href="index.html">2do list</a></li>
+            <li><a href="index.html?mysaves=to-do">Saved 2do lists</a></li>
+            <li><a href="https://www.news4kids.co.uk">News4kids homepage</a></li>
+            <li><a href="https://html.news4kids.uk">Other .html pages</a></li>
+        </ul>
+
+</header>
+<style>
+ul {list-style-type: none ; margin : 100 ; padding : 3;
+background:White ; overflow:hidden;}
+li a {display:block;text-align:center;
+text-decoration:none;
+color:DodgerBlue;padding:10px;float:left;}
+a:hover {background:LightSkyBLUE; }
+a:link {
+  color: DodgerBlue; 
+  background-color: transparent; 
+  text-decoration: none;
+}
+.tinyPicture {
+    height: 100px;
+    border-radius: 10px;
+}
+.card {
+    width: 200px;
+    height: 270px;
+    border: 2px solid #F0FFFF;
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 10px;
+    margin-top: 10px;
+    font-family: "Trebuchet MS", sans-serif;
+    margin-left:133px;
+}
+.card:hover {
+    border-color: #1E90FF;
+}
+.body:hover {
+    border-color: #1E90FF;
+}
+</style>
+<body>
+
+    <div class="todo-wrapper">
+        <h2>My 2-do list</h2>
+        <p>Double-click an item to mark it as complete. Press Save List for it to save locally onto your computer.</p>
+        <form name="todo-adder">
+            <input type="text" id="todo-entry-box" />
+        </form>
+        <button id="add-button" class="pretty-button">Add</button>
+        <br />
+        <ol id="todo-list">
+        </ol>
+        <div id="control-wrapper">
+            <button id="clear-completed-button" class="pretty-button">Clear Completed</button>
+            <button id="empty-button" class="pretty-button">Empty List</button>
+            <button id="save-button" class="pretty-button">Save List</button>
+        </div>
+    </div>
+    <a href="https://www.news4kids.co.uk" News4kids></a>
+    <article class="card">
+    <img src="https://static.wixstatic.com/media/bc8665_b25ae761a2664064bb875b90244d1647~mv2.png/v1/fill/w_200,h_228,al_c,q_85,usm_0.66_1.00_0.01/logo1_edited.webp" class="tinyPicture">
+    <h3>News4kids</h3>
+    <p>News, Education, Fun and more for kids, by kids</p>
+</article>
+
+    <script src="https://news4kids.uk/html-pages/2dolist/script.js"></script>
+</body>
+
+
+
+</html>
